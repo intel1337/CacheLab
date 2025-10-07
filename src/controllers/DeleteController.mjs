@@ -1,4 +1,4 @@
-import { kv } from '../main.js'
+
 
 export default class DeleteController {
     remove(req, res) {

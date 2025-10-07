@@ -1,7 +1,16 @@
 import mapControllers from './server.mjs'
 import { CachelabConfig } from './config.mjs'
+import { HashMap } from './model/model.mjs'
 
-export const kv = []
+
+
+
+console.clear()
+
+
+export const hashmap = new HashMap()
+
+
 if(!CachelabConfig.bearer){
     console.log('Erreur, mettez votre bearer dans le fichier config')
 }
@@ -20,6 +29,7 @@ async function bootstrapcApplication(){
     }
 
 }
+
 
 const start = performance.now();
 

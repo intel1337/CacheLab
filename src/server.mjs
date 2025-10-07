@@ -4,9 +4,10 @@ import PostController from './controllers/PostController.mjs'
 import PutController from './controllers/PutController.mjs'
 import DeleteController from './controllers/DeleteController.mjs'
 import cors from 'cors'
+
+
 export default function mapControllers(listen, port){
     const app = express()
-
     app.use(express.json(), cors())
 
     const getController = new GetController()

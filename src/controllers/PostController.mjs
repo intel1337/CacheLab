@@ -1,5 +1,5 @@
-import { kv } from '../main.js'
-import Key from '../dto/model.mjs'
+import { hashmap } from '../main.js'
+import { Key } from '../model/model.mjs';
 
 export default class PostController {
     create(req, res) {
