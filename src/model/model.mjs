@@ -7,6 +7,8 @@ export class Key {
   }
 }
 
+
+
 export class HashMap {
   constructor(size = 8) {
     this.size = size;
@@ -52,4 +54,16 @@ export class HashMap {
 
     return null;
   }
+    delete(key) {       
+    const index = this.hash(key);
+    const bucket = this.table[index];
+    
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        bucket.splice(i, 1);
+        return true;
+      }
+    }
+    }
+    
 }
