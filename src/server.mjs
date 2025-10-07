@@ -1,9 +1,12 @@
 import express from "express";
+import cors from 'cors'
+
 import GetController from './controllers/GetController.mjs'
 import PostController from './controllers/PostController.mjs'
 import PutController from './controllers/PutController.mjs'
 import DeleteController from './controllers/DeleteController.mjs'
-import cors from 'cors'
+
+import { authInjection } from './utils/auth.mjs';
 
 
 export default function mapControllers(listen, port){
@@ -17,9 +20,9 @@ export default function mapControllers(listen, port){
 
     app.get('/key/:key', (req, res) => getController.getOne(req, res))
     app.get('/keys', (req, res) => getController.getAll(req, res))
-    app.post('/keys', (req, res) => postController.create(req, res))
-    app.put('/keys/:key', (req, res) => putController.update(req, res))
-    app.delete('/keys/:key', (req, res) => deleteController.remove(req, res))
+    app.post('/keys', authInjection, (req, res) => postController.create(req, res))
+    app.put('/keys/:key', authInjection, (req, res) => putController.update(req, res))
+    app.delete('/keys/:key', authInjection, (req, res) => deleteController.remove(req, res))
 
 
     if(listen===true){

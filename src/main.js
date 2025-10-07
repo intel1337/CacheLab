@@ -33,7 +33,7 @@ async function bootstrapcApplication(){
 
 const start = performance.now();
 
-await bootstrapcApplication();
+await bootstrapcApplication(true, CachelabConfig.port);
 
 const end = performance.now();
 console.log(`Temps de boot: ${(end - start).toFixed(4)} ms`);
