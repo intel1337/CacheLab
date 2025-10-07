@@ -16,7 +16,6 @@ export default class GetController {
   getAll(req, res) {
     const start = performance.now();
 
-    // 🧩 on reconstruit une liste à partir de la table interne
     const all = [];
     for (let bucket of hashmap.table) {
       for (let [key, value] of bucket) {
