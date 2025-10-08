@@ -6,7 +6,7 @@ import PostController from './controllers/PostController.mjs'
 import PutController from './controllers/PutController.mjs'
 import DeleteController from './controllers/DeleteController.mjs'
 
-import { authInjection } from './utils/auth.mjs';
+import { authInjection } from './guard/auth.mjs';
 
 
 export default function mapControllers(listen, port){
