@@ -23,8 +23,8 @@ export default class GetController {
     try {
         const all = [];
     for (let bucket of hashmap.table) {
-      for (let [key, value] of bucket) {
-        all.push({ key, value });
+      for (let kv of bucket) {
+        all.push({ key: kv.key, value: kv.value });
       }
     }
     res.json(all);

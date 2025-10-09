@@ -1,9 +1,20 @@
 import crypto from "crypto";
 
-export class Key { constructor(key, value) { 
+export class Key {
+   constructor(key, value) { 
     this.key = key; 
     this.value = value; 
 } }
+
+
+export class SkipList{
+  constructor(key,value){
+    this.key = key
+    this.value = value
+    this.next = null
+  }
+}
+
 
 export class HashMap {
   constructor(size = 8) {
@@ -37,8 +48,8 @@ export class HashMap {
         this.count = 0;
 
         for (let bucket of previous) {
-            for (let [key, value] of bucket) {
-            this.set(key, value);
+            for (let kv of bucket) {
+            this.set(kv.key, kv.value);
                 }
             }
         console.log(`Après Rehash : ${this.loadFactor()}`)
@@ -50,15 +61,15 @@ set(key, value) {
     let updated = false;
 
     for (let kv of bucket) {
-      if (kv[0] === key) {
-        kv[1] = value;
+      if (kv.key === key) {
+        kv.value = value;
         updated = true;
         break;
       }
     }
 
     if (!updated) {
-      bucket.push([key, value]);
+      bucket.push(new Key(key, value));
       this.count++;
     }
     console.log(`Current LoadFactor : ${this.loadFactor()}`)
@@ -73,7 +84,7 @@ set(key, value) {
     const index = this.hash(key);
     const bucket = this.table[index];
     for (let kv of bucket) {
-      if (kv[0] === key) return kv[1];
+      if (kv.key === key) return kv.value;
     }
     return null;
     
@@ -83,7 +94,7 @@ set(key, value) {
     const index = this.hash(key);
     const bucket = this.table[index];
     for (let i = 0; i < bucket.length; i++) {
-      if (bucket[i][0] === key) {
+      if (bucket[i].key === key) {
         bucket.splice(i, 1);
         this.count--;
         return true;
