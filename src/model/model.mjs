@@ -26,22 +26,24 @@ export class HashMap {
 }
 
     rehash() {
-    const previous = this.table;
-    this.size *= 2;
-    this.table = [];
+        const previous = this.table;
+        this.size *= 2;
+        this.table = [];
 
-    for (let i = 0; i < this.size; i++) {
-        this.table[i] = [];
-    }
-
-    this.count = 0;
-
-    for (let bucket of previous) {
-        for (let [key, value] of bucket) {
-        this.set(key, value);
-            }
+        for (let i = 0; i < this.size; i++) {
+            this.table[i] = [];
         }
-    }
+
+        this.count = 0;
+
+        for (let bucket of previous) {
+            for (let [key, value] of bucket) {
+            this.set(key, value);
+                }
+            }
+        console.log(`Après Rehash : ${this.loadFactor()}`)
+
+        }
 set(key, value) {
     const index = this.hash(key);
     const bucket = this.table[index];
@@ -59,6 +61,8 @@ set(key, value) {
       bucket.push([key, value]);
       this.count++;
     }
+    console.log(`Current LoadFactor : ${this.loadFactor()}`)
+
 
     if (this.loadFactor() > 0.75) {
       this.rehash();
@@ -72,6 +76,7 @@ set(key, value) {
       if (kv[0] === key) return kv[1];
     }
     return null;
+    
   }
 
   delete(key) {
